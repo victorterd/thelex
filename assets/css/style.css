@@ -81,10 +81,6 @@ h2 em{font-style:normal;color:var(--pink)}
 }
 .nav__brand:hover{transform:rotate(-2deg) scale(1.04)}
 .nav__logo{width:clamp(88px,9vw,118px);height:auto}
-.nav__brand span{
-  font-weight:700;font-size:.55rem;letter-spacing:.42em;text-transform:uppercase;
-  color:var(--ink);opacity:.8;margin-top:.4em;text-indent:.2em;
-}
 .nav__links{display:flex;gap:1.8rem;margin-left:auto}
 .nav__links a{
   position:relative;text-decoration:none;font-weight:600;font-size:.92rem;padding:.3rem 0;
@@ -390,6 +386,7 @@ h2 em{font-style:normal;color:var(--pink)}
 }
 @media (max-width:899px){
   .nav__links{display:none}
+  .nav__cta{margin-left:auto}
   .hero{min-height:92dvh;padding-top:6.5rem}
   .hero__float--1{left:2%;top:2%}
   .hero__float--2{right:-2%;top:38%}
