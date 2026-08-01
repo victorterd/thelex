@@ -76,12 +76,14 @@ h2 em{font-style:normal;color:var(--pink)}
   padding-block:.6rem;
 }
 .nav__brand{
-  display:flex;flex-direction:column;line-height:1;
-  font-weight:800;font-size:1.1rem;letter-spacing:-.01em;text-decoration:none;
+  display:flex;flex-direction:column;line-height:1;text-decoration:none;
+  transition:transform .25s var(--ease);
 }
+.nav__brand:hover{transform:rotate(-2deg) scale(1.04)}
+.nav__logo{width:clamp(88px,9vw,118px);height:auto}
 .nav__brand span{
   font-weight:700;font-size:.55rem;letter-spacing:.42em;text-transform:uppercase;
-  color:var(--pink-deep);margin-top:.28em;
+  color:var(--ink);opacity:.8;margin-top:.4em;text-indent:.2em;
 }
 .nav__links{display:flex;gap:1.8rem;margin-left:auto}
 .nav__links a{
@@ -131,18 +133,16 @@ h2 em{font-style:normal;color:var(--pink)}
 }
 .hero__eyebrow i{font-style:normal;color:var(--pink);font-size:.8rem}
 .hero__title{display:flex;flex-direction:column;align-items:center}
-.hero__thelex{
-  font-weight:800;letter-spacing:-.04em;line-height:1.06;
-  font-size:clamp(3.1rem,12vw,10.2rem);
-  white-space:nowrap;
-  margin-top:.05em;
+.hero__logo{
+  width:min(80%,880px);height:auto;
+  margin-top:clamp(1rem,3vh,1.8rem);
+  filter:drop-shadow(0 26px 50px rgb(250 130 183/.38));
 }
-.hero__thelex .ch{display:inline-block}
 .hero__bakehouse{
   font-weight:700;font-size:clamp(.85rem,1.7vw,1.15rem);
   letter-spacing:clamp(.45em,1.2vw,.62em);text-transform:uppercase;
-  color:var(--pink-deep);
-  margin-top:.9em;text-indent:.5em;
+  color:var(--ink);
+  margin-top:1.6em;text-indent:.5em;
 }
 .hero__lead{
   max-width:30rem;margin:2.1rem auto 0;
@@ -348,23 +348,19 @@ h2 em{font-style:normal;color:var(--pink)}
 .footer__meta a{color:var(--ink);font-weight:600;text-decoration-color:var(--pink);text-underline-offset:3px}
 .footer__meta a:hover{color:var(--pink-deep)}
 .footer__giant{
-  font-weight:800;letter-spacing:-.05em;line-height:.78;
-  font-size:clamp(5.5rem,19vw,16rem);
-  text-align:center;white-space:nowrap;
-  margin-top:clamp(1.5rem,4vh,2.5rem);
-  transform:translateY(.14em);
-  color:var(--ink);
-  user-select:none;
+  display:block;width:min(88vw,1240px);height:auto;
+  margin:clamp(2rem,5vh,3.5rem) auto 0;
+  transform:translateY(16%);
+  user-select:none;-webkit-user-drag:none;
 }
 
 /* ============================================================
    MOTION — load & scroll (gated .js)
    ============================================================ */
 .js .hero__eyebrow{animation:fadeUp .8s var(--ease) .1s both}
-.js .hero__thelex{overflow:hidden}
-.js .hero__thelex .ch{animation:chIn .8s var(--ease) both;animation-delay:calc(.2s + var(--i)*.04s)}
-.js .hero__thelex:not(.split){animation:fadeUp .8s var(--ease) .2s both}
+.js .hero__logo{animation:logoIn 1.1s var(--ease) .22s both}
 .js .hero__bakehouse{animation:trackIn 1.1s var(--ease) .6s both}
+@keyframes logoIn{from{opacity:0;transform:translateY(30px) scale(.94) rotate(-2deg)}to{opacity:1;transform:none}}
 .js .hero__lead{animation:fadeUp .8s var(--ease) .75s both}
 .js .hero__cta{animation:fadeUp .8s var(--ease) .88s both}
 .js .hero__float{opacity:0;animation:floatIn .9s var(--ease) both,bob 7s ease-in-out 1.8s infinite alternate}
@@ -409,7 +405,7 @@ h2 em{font-style:normal;color:var(--pink)}
 @media (max-width:639px){
   .hero__float--1{display:none}
   .hero__float--3{display:none}
-  .hero__float--2{width:24vw;right:-4%;top:15%}
+  .hero__float--2{width:21vw;right:-3%;top:4%}
   .badge{display:none}
   .hero__lead{padding-inline:.5rem}
 }
