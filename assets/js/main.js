@@ -44,6 +44,22 @@
     Array.prototype.slice.call(root.childNodes).forEach(wrap);
   }
 
+  /* fit nowrap display text to its container width */
+  function fitText(el, ratio, maxPx) {
+    if (!el) return;
+    el.style.fontSize = "";
+    var avail = (el.parentElement.clientWidth || window.innerWidth) * ratio;
+    var w = el.scrollWidth;
+    if (w > 0 && avail > 0) {
+      var cur = parseFloat(getComputedStyle(el).fontSize);
+      el.style.fontSize = Math.min(cur * avail / w, maxPx) + "px";
+    }
+  }
+  function fitAll() {
+    fitText(document.querySelector(".hero__thelex"), 0.99, 250);
+    fitText(document.querySelector(".footer__giant"), 0.99, 300);
+  }
+
   /* ---------- init on DOM ready ---------- */
   function init() {
     var thelex = document.querySelector(".hero__thelex");
@@ -66,6 +82,10 @@
       revealEls.forEach(function (el) { io.observe(el); });
       wordEls.forEach(function (el) { io.observe(el); });
     }
+
+    fitAll();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+    window.addEventListener("resize", fitAll, { passive: true });
 
     /* ---------- scroll-driven bits ---------- */
     var progress = document.querySelector(".progress i");

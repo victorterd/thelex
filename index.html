@@ -12,7 +12,6 @@
 <meta name="theme-color" content="#FFF3EF">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/Fraunces-Italic-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Syne-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 <script>document.documentElement.classList.add('js')</script>
@@ -26,8 +25,7 @@
 
 <header class="nav" id="top">
   <a class="nav__brand" href="#top" aria-label="The Lex Bakehouse — începutul paginii">
-    <span class="nav__thelex">The&nbsp;Lex</span>
-    <span class="nav__bakehouse">Bakehouse</span>
+    The Lex<span>Bakehouse</span>
   </a>
   <nav class="nav__links" aria-label="Navigare principală">
     <a href="#vitrina">Vitrina</a>
@@ -42,48 +40,40 @@
 
 <main>
 
-  <!-- ▍HERO -->
+  <!-- ▍HERO — wordmark editorial, fotografii plutitoare -->
   <section class="hero">
-    <div class="hero__bg" aria-hidden="true"></div>
     <div class="hero__inner">
-      <div class="hero__copy">
-        <p class="hero__eyebrow">Cofetărie artizanală</p>
-        <h1 class="hero__title">
-          <span class="hero__thelex">The&nbsp;Lex</span>
-          <span class="hero__bakehouse">Bakehouse</span>
-        </h1>
-        <p class="hero__lead">Choux à la craquelin, torturi și prăjituri făcute de mână, în ture mici — cu unt adevărat, fructe de sezon și mult roz.</p>
-        <div class="hero__cta">
-          <a class="btn btn--pink btn--big" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener">
-            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5v-.5L9.6 8.2c-.2-.4-.4-.4-.7-.4Z"/></svg>
-            Comandă pe WhatsApp
-          </a>
-          <a class="btn btn--ghost" href="#vitrina">Vezi vitrina</a>
-        </div>
+      <p class="hero__eyebrow"><i>✦</i> Cofetărie artizanală <i>✦</i></p>
+
+      <h1 class="hero__title">
+        <span class="hero__thelex">The Lex</span>
+        <span class="hero__bakehouse">Bakehouse</span>
+      </h1>
+
+      <p class="hero__lead">Choux à la craquelin, torturi și prăjituri făcute de&nbsp;mână, în ture mici — cu unt adevărat și fructe de&nbsp;sezon.</p>
+
+      <div class="hero__cta">
+        <a class="btn btn--pink btn--big" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5v-.5L9.6 8.2c-.2-.4-.4-.4-.7-.4Z"/></svg>
+          Comandă pe WhatsApp
+        </a>
+        <a class="btn btn--ghost" href="#vitrina">Vezi vitrina</a>
       </div>
 
-      <figure class="hero__photo">
-        <img class="hero__img" src="assets/img/products/choux-fistic-caramel.webp"
-             srcset="assets/img/products/choux-fistic-caramel-sm.webp 800w, assets/img/products/choux-fistic-caramel.webp 1600w"
-             sizes="(min-width: 900px) 44vw, 88vw"
-             width="1472" height="1600" fetchpriority="high"
-             alt="Choux à la craquelin cu cremă de fistic, miez de caramel și o floare comestibilă roșie, pe o tavă argintie gravată">
-        <figcaption class="hero__chip">Choux fistic &amp; caramel — vedeta vitrinei</figcaption>
+      <!-- fotografii plutitoare, ca în referință -->
+      <img class="hero__float hero__float--1" src="assets/img/products/choux-zmeura-caise-sm.webp" alt="" width="150" height="150" aria-hidden="true">
+      <img class="hero__float hero__float--2" src="assets/img/products/choux-fistic-caramel-sm.webp" alt="" width="230" height="230" aria-hidden="true">
+      <img class="hero__float hero__float--3" src="assets/img/products/choux-afine-sm.webp" alt="" width="170" height="170" aria-hidden="true">
 
-        <a class="badge" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener" aria-label="Comandă pe WhatsApp — răspundem cu drag">
-          <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true">
-            <defs><path id="orb" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
-            <text><textPath href="#orb" textLength="237" lengthAdjust="spacingAndGlyphs">COMANDĂ PE WHATSAPP ✦ RĂSPUNDEM CU DRAG ✦&nbsp;</textPath></text>
-          </svg>
-          <span class="badge__core" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.5-4.6-10-9.2C.5 8.5 2.6 5 6 5c2 0 3.4 1.1 4 2.2h4c.6-1.1 2-2.2 4-2.2 3.4 0 5.5 3.5 4 6.8C19.5 16.4 12 21 12 21Z" transform="scale(.92) translate(1 .5)"/></svg>
-          </span>
-        </a>
-
-        <img class="sticker sticker--seal" src="assets/img/stickers/seal.webp" alt="" width="120" height="117" loading="lazy">
-      </figure>
-
-      <img class="sticker sticker--kiss" src="assets/img/stickers/kiss.webp" alt="" width="110" height="110" loading="lazy">
+      <a class="badge" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener" aria-label="Comandă pe WhatsApp — The Lex Bakehouse">
+        <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true">
+          <defs><path id="orb" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+          <text><textPath href="#orb" textLength="237" lengthAdjust="spacingAndGlyphs">COMANDĂ PE WHATSAPP ✦ THE LEX BAKEHOUSE ✦&nbsp;</textPath></text>
+        </svg>
+        <span class="badge__core" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/></svg>
+        </span>
+      </a>
     </div>
   </section>
 
@@ -121,7 +111,7 @@
         <figure class="card__media"><img src="assets/img/products/choux-vanilie-zmeura-sm.webp" srcset="assets/img/products/choux-vanilie-zmeura-sm.webp 800w, assets/img/products/choux-vanilie-zmeura.webp 1600w" sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 88vw" width="800" height="1067" loading="lazy" alt="Choux auriu cu cremă de vanilie cu semințe, dulceață de fructe de pădure și o zmeură proaspătă"></figure>
         <div class="card__body">
           <h3>Choux vanilie &amp; zmeură</h3>
-          <p>Cremă de vanilie cu semințe, dulceață de fructe de pădure, zmeură proaspătă.</p>
+          <p>Cremă de vanilie, dulceață de fructe de pădure, zmeură proaspătă.</p>
           <a class="card__order" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20vanilie%20%26%20zmeur%C4%83" target="_blank" rel="noopener">Comandă<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a>
         </div>
       </article>
@@ -184,15 +174,15 @@
           <h2 data-words>Cum <em>comanzi</em></h2>
           <ol class="steps__list">
             <li class="step is-active">
-              <span class="step__num">1</span>
+              <span class="step__num">01</span>
               <div><h3>Alegi desertul</h3><p>Din vitrina zilei — sau un tort gândit special pentru evenimentul tău.</p></div>
             </li>
             <li class="step">
-              <span class="step__num">2</span>
+              <span class="step__num">02</span>
               <div><h3>Ne scrii pe WhatsApp</h3><p>Spui data, numărul de porții și povestea din spatele ocaziei.</p></div>
             </li>
             <li class="step">
-              <span class="step__num">3</span>
+              <span class="step__num">03</span>
               <div><h3>Îl ridici proaspăt</h3><p>Îl pregătim chiar în ziua întâlnirii, ambalat frumos, gata de sărbătoare.</p></div>
             </li>
           </ol>
@@ -209,14 +199,14 @@
 
   <!-- ▍STATEMENT -->
   <section class="statement">
-    <p class="statement__text" data-words>Coacem în ture mici, cu unt adevărat și fructe de sezon — iar fiecare cutie pleacă sigilată cu un sărut.</p>
-    <img class="statement__kiss" src="assets/img/stickers/kiss.webp" alt="" width="96" height="96" loading="lazy">
+    <p class="statement__text" data-words>Coacem în ture mici, cu unt adevărat și fructe de sezon — iar fiecare cutie pleacă sigilată cu un <em>sărut</em>.</p>
+    <img class="statement__kiss" src="assets/img/stickers/kiss.webp" alt="" width="80" height="80" loading="lazy">
   </section>
 
   <!-- ▍CTA -->
   <section class="cta" id="contact">
     <div class="cta__panel reveal">
-      <img class="sticker sticker--ctaseal" src="assets/img/stickers/seal.webp" alt="" width="140" height="136" loading="lazy">
+      <img class="sticker sticker--ctaseal" src="assets/img/stickers/seal.webp" alt="" width="110" height="107" loading="lazy">
       <p class="eyebrow eyebrow--light">Comenzi deschise</p>
       <h2 data-words>Poftă de ceva <em>dulce</em>?</h2>
       <p class="cta__sub">Scrie-ne pe WhatsApp — stabilim împreună desertul, data și ridicarea. Răspundem cu drag.</p>
@@ -232,9 +222,11 @@
 </main>
 
 <footer class="footer">
-  <p class="footer__brand"><span>The&nbsp;Lex</span> Bakehouse</p>
-  <p>Cofetărie artizanală · Comenzi pe <a href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener">WhatsApp</a></p>
-  <p>© <span id="year">2026</span> The Lex Bakehouse · Făcut cu drag</p>
+  <div class="footer__meta">
+    <p>Cofetărie artizanală · Comenzi pe <a href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener">WhatsApp</a></p>
+    <p>© <span id="year">2026</span> The Lex Bakehouse · Făcut cu drag</p>
+  </div>
+  <p class="footer__giant" aria-hidden="true">The Lex</p>
 </footer>
 
 <script src="assets/js/main.js" defer></script>
