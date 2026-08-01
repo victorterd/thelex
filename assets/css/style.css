@@ -211,6 +211,10 @@ h2 em{font-style:normal;color:var(--pink)}
   gap:3.4rem 2.2rem;
 }
 .card{text-align:center}
+@media (min-width:1024px){.grid .card:nth-child(3n+1):last-child{grid-column:2}}
+@media (min-width:520px) and (max-width:1023px){
+  .grid .card:nth-child(odd):last-child{grid-column:1/-1;justify-self:center;width:calc(50% - .8rem)}
+}
 .card__media{
   aspect-ratio:1;border-radius:var(--r-md);overflow:hidden;
   background:#fff;
