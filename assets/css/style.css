@@ -234,6 +234,7 @@ h2 em{font-style:normal;color:var(--pink)}
 .card:hover .card__media img,.card:focus-within .card__media img{transform:scale(1.05) rotate(1deg)}
 .card__body{padding-top:1.25rem}
 .card__body h3{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+.card__body .card__price{font-weight:800;font-size:.98rem;color:var(--pink-deep);margin-top:.35rem;letter-spacing:.04em}
 .card__body p{
   font-size:.86rem;color:var(--ink-soft);
   max-width:17rem;margin:.4rem auto 0;line-height:1.55;
@@ -251,8 +252,14 @@ h2 em{font-style:normal;color:var(--pink)}
 .card__order:hover{background:var(--pink-deep);transform:translateY(-2px);box-shadow:0 16px 30px -12px rgb(240 97 158/.9)}
 .card__order:hover .ic{transform:translateX(4px)}
 .card__order:active{transform:scale(.97)}
+.products__min{
+  max-width:var(--container);margin:3.2rem auto 0;text-align:center;
+  font-weight:600;font-size:.92rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink);
+}
+.products__min strong{color:var(--pink-deep);font-weight:800}
 .products__note{
-  max-width:var(--container);margin:3.4rem auto 0;text-align:center;
+  max-width:var(--container);margin:.9rem auto 0;text-align:center;
   font-size:.95rem;color:var(--ink-soft);
 }
 .products__note a{color:var(--ink);font-weight:700;text-decoration-color:var(--pink);text-decoration-thickness:1.5px;text-underline-offset:4px}
