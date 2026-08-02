@@ -11,6 +11,11 @@
   src:url("../fonts/Syne-var.woff2") format("woff2");
   font-weight:400 800; font-style:normal; font-display:swap;
 }
+@font-face{
+  font-family:"Fraunces Num";
+  src:url("../fonts/Fraunces-num.woff2") format("woff2");
+  font-weight:100 900; font-style:normal; font-display:swap;
+}
 
 /* ---------- tokens ---------- */
 :root{
@@ -234,7 +239,12 @@ h2 em{font-style:normal;color:var(--pink)}
 .card:hover .card__media img,.card:focus-within .card__media img{transform:scale(1.05) rotate(1deg)}
 .card__body{padding-top:1.25rem}
 .card__body h3{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
-.card__body .card__price{font-weight:800;font-size:.98rem;color:var(--pink-deep);margin-top:.35rem;letter-spacing:.04em}
+.card__body .card__price{
+  font-family:"Fraunces Num",Georgia,serif;
+  font-variation-settings:"SOFT" 100,"opsz" 40;
+  font-weight:700;font-size:1.12rem;color:var(--pink-deep);
+  margin-top:.35rem;letter-spacing:.02em;
+}
 .card__body p{
   font-size:.86rem;color:var(--ink-soft);
   max-width:17rem;margin:.4rem auto 0;line-height:1.55;
@@ -257,7 +267,12 @@ h2 em{font-style:normal;color:var(--pink)}
   font-weight:600;font-size:.92rem;letter-spacing:.06em;text-transform:uppercase;
   color:var(--ink);
 }
-.products__min strong{color:var(--pink-deep);font-weight:800}
+.products__min strong{
+  font-family:"Fraunces Num",Georgia,serif;
+  font-variation-settings:"SOFT" 100,"opsz" 40;
+  font-weight:700;font-size:1.18em;color:var(--pink-deep);
+  letter-spacing:.02em;text-transform:none;
+}
 .products__note{
   max-width:var(--container);margin:.9rem auto 0;text-align:center;
   font-size:.95rem;color:var(--ink-soft);
