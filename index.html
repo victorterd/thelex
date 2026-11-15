@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Lex Bakehouse — Cofetărie artizanală · Comenzi pe WhatsApp</title>
-<meta name="description" content="Choux à la craquelin și tarte fine, făcute de mână în ture mici, cu cele mai bune ingrediente. Comandă pe WhatsApp: +40 736 619 631.">
-<meta property="og:title" content="The Lex Bakehouse — Cofetărie artizanală">
-<meta property="og:description" content="Choux à la craquelin și tarte fine, făcute de mână. Comandă pe WhatsApp.">
+<title>The Lex Bakehouse — Pâtisserie artizanală</title>
+<meta name="description" content="Choux à la craquelin și tarte fine, făcute de mână în ture mici. Comenzi pe WhatsApp: +40 736 619 631. Comandă minimă 100 lei.">
+<meta property="og:title" content="The Lex Bakehouse — Pâtisserie artizanală">
+<meta property="og:description" content="Choux à la craquelin și tarte fine, făcute de mână. Comenzi pe WhatsApp.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#FFF3EF">
@@ -18,323 +18,198 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Bakery","name":"The Lex Bakehouse","telephone":"+40736619631","servesCuisine":"Cofetărie artizanală","priceRange":"30–35 lei"}
+{"@context":"https://schema.org","@type":"Bakery","name":"The Lex Bakehouse","telephone":"+40736619631","servesCuisine":"Pâtisserie artizanală","priceRange":"30–35 lei"}
 </script>
 </head>
 <body>
 
-<div class="loader" aria-hidden="true">
-  <div class="loader__inner">
-    <img class="loader__logo" src="assets/img/logo-sm.webp" alt="" width="360" height="138">
-    <span class="loader__bar"><i></i></span>
-  </div>
-</div>
-
-<div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><b class="cursor__label"></b></span></div>
-<div class="progress" aria-hidden="true"><i></i></div>
-
+<div class="curtain" aria-hidden="true"><img src="assets/img/logo-sm.webp" alt="" width="360" height="138"></div>
 <a class="skip" href="#vitrina">Sari la vitrină</a>
 
-<div class="topbar">
-  <p><span class="hide-sm">Comenzi pe WhatsApp</span><i class="hide-sm">✦</i><span>Comandă minimă <b>100</b> lei</span><i>✦</i><span>Asamblate în ziua livrării</span></p>
-</div>
-
-<header class="nav" id="top">
+<header class="nav">
+  <a class="nav__brand" href="#top" aria-label="The Lex Bakehouse — începutul paginii"><img src="assets/img/logo-sm.webp" alt="The Lex" width="360" height="138"></a>
   <nav class="nav__links" aria-label="Navigare principală">
-    <a href="#vitrina">Vitrina</a>
-    <a href="#comanda">Cum comanzi</a>
-    <a href="#contact">Contact</a>
+    <a href="#vitrina"><span data-t="Vitrina">Vitrina</span></a>
+    <a href="#atelier"><span data-t="Atelier">Atelier</span></a>
+    <a href="#comanda"><span data-t="Comandă">Comandă</span></a>
   </nav>
-  <a class="nav__brand" href="#top" aria-label="The Lex Bakehouse — începutul paginii">
-    <img src="assets/img/logo-sm.webp" alt="The Lex" width="360" height="138">
-  </a>
-  <div class="nav__end">
-    <a class="nav__tel" href="tel:+40736619631">+40 736 619 631</a>
-    <a class="btn btn--pink btn--sm" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5v-.5L9.6 8.2c-.2-.4-.4-.4-.7-.4Z"/></svg><span>Comandă</span></a>
-  </div>
+  <a class="nav__cta" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener"><span data-t="WhatsApp">WhatsApp</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></a>
 </header>
 
-<main>
+<main id="top">
 
-  <!-- ▍HERO -->
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero__copy">
-      <p class="label hero__eyebrow"><span class="dot"></span>Cofetărie artizanală · The Lex Bakehouse</p>
-      <h1 class="hero__title" data-lines>Choux à la craquelin <em>făcute de mână</em>, în ture mici.</h1>
-      <p class="hero__lead">Creme fine, inserturi de fructe și craquelin crocant, pregătite cu cele mai bune ingrediente. Alegi desertul, ne scrii pe WhatsApp, îl ridici proaspăt.</p>
-      <div class="hero__cta">
-        <a class="btn btn--pink btn--lg" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5v-.5L9.6 8.2c-.2-.4-.4-.4-.7-.4Z"/></svg><span>Comandă pe WhatsApp</span></a>
-        <a class="btn btn--line btn--lg" href="#vitrina"><span>Vezi vitrina</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a>
-      </div>
-      <dl class="hero__facts">
-        <div><dt>Deserturi în vitrină</dt><dd>6</dd></div>
-        <div><dt>Prețuri de la</dt><dd>30 <small>lei</small></dd></div>
-        <div><dt>Comandă minimă</dt><dd>100 <small>lei</small></dd></div>
-      </dl>
+    <div class="hero__meta">
+      <p>Pâtisserie artizanală</p>
+      <p class="hide-sm">Choux à la craquelin<br>&amp; tarte fine</p>
+      <p>Comenzi pe WhatsApp</p>
     </div>
 
-    <div class="show" data-show aria-roledescription="carusel" aria-label="Deserturile din vitrină">
-      <div class="show__arch">
-        <span class="show__glow" aria-hidden="true"></span>
-        <div class="show__stage">
-            <img class="show__img is-active" src="assets/img/products/choux-vanilie-zmeura-sm.webp" srcset="assets/img/products/choux-vanilie-zmeura-sm.webp 1x, assets/img/products/choux-vanilie-zmeura.webp 2x" width="603" height="640" fetchpriority="high" decoding="async" alt="Choux auriu cu cremă diplomat de vanilie și o zmeură proaspătă deasupra" data-name="Choux vanilie &amp; zmeură" data-price="30 lei" data-href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20vanilie%20%26%20zmeur%C4%83">
-            <img class="show__img" src="assets/img/products/choux-afine-sm.webp" srcset="assets/img/products/choux-afine-sm.webp 1x, assets/img/products/choux-afine.webp 2x" width="640" height="634" loading="lazy" decoding="async" alt="Choux cu craquelin roz, namelaka de căpșuni și afine proaspete deasupra" data-name="Choux cu căpșuni și afine" data-price="30 lei" data-href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20cu%20c%C4%83p%C8%99uni%20%C8%99i%20afine">
-            <img class="show__img" src="assets/img/products/choux-ciocolata-sm.webp" srcset="assets/img/products/choux-ciocolata-sm.webp 1x, assets/img/products/choux-ciocolata.webp 2x" width="570" height="640" loading="lazy" decoding="async" alt="Choux de cacao cu cremă de ciocolată belgiană, compote de banane și floare comestibilă" data-name="Choux ciocolată &amp; banane flambate" data-price="30 lei" data-href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20ciocolat%C4%83%20%26%20banane%20flambate">
-            <img class="show__img" src="assets/img/products/choux-zmeura-caise-sm.webp" srcset="assets/img/products/choux-zmeura-caise-sm.webp 1x, assets/img/products/choux-zmeura-caise.webp 2x" width="632" height="640" loading="lazy" decoding="async" alt="Choux cu craquelin violet, namelaka de cocos și jeleu de mango cu fructul pasiunii, decorat cu petale roșii" data-name="Choux cocos, mango &amp; fructul pasiunii" data-price="30 lei" data-href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20cocos%2C%20mango%20%26%20fructul%20pasiunii">
-            <img class="show__img" src="assets/img/products/choux-mango-sm.webp" srcset="assets/img/products/choux-mango-sm.webp 1x, assets/img/products/choux-mango.webp 2x" width="640" height="472" loading="lazy" decoding="async" alt="Tartă cu jeleu de mango în spirală, namelaka de cocos, bezea și fulgi de cocos" data-name="Tartă cu mango, cocos și fructul pasiunii" data-price="35 lei" data-href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Tart%C4%83%20cu%20mango%2C%20cocos%20%C8%99i%20fructul%20pasiunii">
-            <img class="show__img" src="assets/img/products/tarta-tiramisu-sm.webp" srcset="assets/img/products/tarta-tiramisu-sm.webp 1x, assets/img/products/tarta-tiramisu.webp 2x" width="640" height="425" loading="lazy" decoding="async" alt="Tartă tiramisu alungită cu picuri de mascarpone pudrați cu cacao" data-name="Tartă tiramisu" data-price="32 lei" data-href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Tart%C4%83%20tiramisu">
-        </div>
-        <span class="show__shadow" aria-hidden="true"></span>
-        <div class="show__caption">
-          <div class="show__meta">
-            <span class="show__count" aria-hidden="true"><b>01</b> / 06</span>
-            <a class="show__name" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20vanilie%20%26%20zmeur%C4%83" target="_blank" rel="noopener" aria-live="polite">Choux vanilie &amp; zmeură</a>
-          </div>
-          <span class="show__price">30 lei</span>
-          <div class="show__ctrl">
-            <button class="show__btn" type="button" data-dir="-1" aria-label="Desertul anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg></button>
-            <button class="show__btn" type="button" data-dir="1" aria-label="Desertul următor"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4 4.6 4.6z"/></svg></button>
-          </div>
-          <span class="show__progress" aria-hidden="true"><i></i></span>
-        </div>
-      </div>
+    <h1 class="hero__title">
+      <span class="line"><span>Făcute de mână,</span></span>
+      <span class="line line--in"><span><em>în ture</em></span><span class="hero__pic"><img src="assets/img/products/choux-vanilie-zmeura.webp" width="981" height="1041" alt="Choux cu cremă diplomat de vanilie și zmeură" fetchpriority="high"></span><span><em>mici.</em></span></span>
+    </h1>
 
-      <a class="badge" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener" aria-label="Comandă pe WhatsApp">
-        <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true">
-          <defs><path id="orb" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
-          <text><textPath href="#orb" textLength="237" lengthAdjust="spacingAndGlyphs">COMANDĂ PE WHATSAPP ✦ THE LEX BAKEHOUSE ✦&nbsp;</textPath></text>
-        </svg>
-        <span class="badge__core" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/></svg></span>
-      </a>
+    <div class="hero__foot">
+      <p class="hero__lead">Choux și tarte fine, asamblate în ziua în care ajung la tine, cu cele mai bune ingrediente.</p>
+      <a class="hero__scroll" href="#vitrina">Vitrina <span>(6)</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </section>
 
-  <!-- ▍MARQUEE -->
-  <div class="mq" aria-hidden="true">
-    <div class="mq__track">
-      <div class="mq__group"><span class="mq__word">Choux à la craquelin</span><img class="mq__sep" src="assets/img/products/choux-vanilie-zmeura-sm.webp" alt="" width="80" height="80" loading="lazy"><span class="mq__word mq__word--o">Tarte fine</span><img class="mq__sep" src="assets/img/products/choux-ciocolata-sm.webp" alt="" width="80" height="80" loading="lazy"><span class="mq__word">Torturi la comandă</span><img class="mq__sep" src="assets/img/products/choux-afine-sm.webp" alt="" width="80" height="80" loading="lazy"><span class="mq__word mq__word--o">Candy bar</span><img class="mq__sep" src="assets/img/products/choux-zmeura-caise-sm.webp" alt="" width="80" height="80" loading="lazy"></div>
-      <div class="mq__group"><span class="mq__word">Choux à la craquelin</span><img class="mq__sep" src="assets/img/products/choux-vanilie-zmeura-sm.webp" alt="" width="80" height="80" loading="lazy"><span class="mq__word mq__word--o">Tarte fine</span><img class="mq__sep" src="assets/img/products/choux-ciocolata-sm.webp" alt="" width="80" height="80" loading="lazy"><span class="mq__word">Torturi la comandă</span><img class="mq__sep" src="assets/img/products/choux-afine-sm.webp" alt="" width="80" height="80" loading="lazy"><span class="mq__word mq__word--o">Candy bar</span><img class="mq__sep" src="assets/img/products/choux-zmeura-caise-sm.webp" alt="" width="80" height="80" loading="lazy"></div>
-    </div>
-  </div>
-
-  <!-- ▍VITRINA -->
-  <section class="shop" id="vitrina">
-    <header class="shop__head">
-      <div>
-        <p class="label reveal">Vitrina</p>
-        <h2 class="reveal" data-words>Dulciurile <em>noastre</em></h2>
-      </div>
-      <div class="shop__aside">
-        <p class="reveal">Fiecare desert e asamblat în ziua în care ajunge la tine. Alege-ți favoritul și apasă „Comandă” — mesajul de WhatsApp se completează singur.</p>
-        <div class="tabs reveal" role="group" aria-label="Filtrează deserturile">
-          <span class="tabs__pill" aria-hidden="true"></span>
-          <button class="tabs__btn is-active" type="button" data-filter="all" aria-pressed="true">Toate <sup>6</sup></button>
-          <button class="tabs__btn" type="button" data-filter="choux" aria-pressed="false">Choux <sup>4</sup></button>
-          <button class="tabs__btn" type="button" data-filter="tarte" aria-pressed="false">Tarte <sup>2</sup></button>
-        </div>
-      </div>
+  <!-- VITRINA -->
+  <section class="menu" id="vitrina">
+    <header class="sec-head">
+      <p class="sec-head__no">01</p>
+      <h2 class="sec-head__title" data-reveal>Vitrina</h2>
+      <p class="sec-head__note">Choux <b>30</b> lei · Tarte <b>32–35</b> lei<br>Comandă minimă <b>100</b> lei</p>
     </header>
 
-    <!-- PRODUSE: generate din scratchpad/build_index.py; editabile și direct aici -->
-    <div class="grid">
-      <article class="item" data-cat="choux">
-        <a class="item__media" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20vanilie%20%26%20zmeur%C4%83" target="_blank" rel="noopener" data-cursor="Comandă" aria-label="Comandă Choux vanilie &amp; zmeură pe WhatsApp">
-          <span class="item__idx">01<i>/06</i></span>
-          <span class="item__tag">Choux</span>
-          <img src="assets/img/products/choux-vanilie-zmeura-sm.webp" srcset="assets/img/products/choux-vanilie-zmeura-sm.webp 1x, assets/img/products/choux-vanilie-zmeura.webp 2x" width="603" height="640" loading="lazy" decoding="async" alt="Choux auriu cu cremă diplomat de vanilie și o zmeură proaspătă deasupra">
-        </a>
-        <div class="item__info">
-          <h3 class="item__name">Choux vanilie &amp; zmeură</h3>
-          <p class="item__desc">Cremă diplomat cu păstaie de vanilie și jeleu fin de fructe roșii.</p>
-          <div class="item__foot">
-            <p class="item__price"><span>30</span> lei</p>
-            <a class="item__order" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20vanilie%20%26%20zmeur%C4%83" target="_blank" rel="noopener">Comandă<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a>
-          </div>
-        </div>
-      </article>
+    <ol class="rows">
+        <li class="row" data-img="0">
+          <a class="row__link" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20vanilie%20%26%20zmeur%C4%83" target="_blank" rel="noopener" aria-label="Comandă Choux Vanilie &amp; zmeură, 30 lei, pe WhatsApp">
+            <span class="row__no">01</span>
+            <span class="row__thumb"><img src="assets/img/products/choux-vanilie-zmeura-sm.webp" width="603" height="640" loading="lazy" decoding="async" alt="Choux auriu cu cremă diplomat de vanilie și o zmeură proaspătă deasupra"></span>
+            <span class="row__main">
+              <span class="row__cat">Choux</span>
+              <span class="row__name"><span class="row__name-in">Vanilie &amp; zmeură</span></span>
+              <span class="row__desc">Cremă diplomat cu păstaie de vanilie și jeleu fin de fructe roșii.</span>
+            </span>
+            <span class="row__price">30<small>lei</small></span>
+            <span class="row__go">Comandă <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="row" data-img="1">
+          <a class="row__link" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20cu%20c%C4%83p%C8%99uni%20%C8%99i%20afine" target="_blank" rel="noopener" aria-label="Comandă Choux Căpșuni &amp; afine, 30 lei, pe WhatsApp">
+            <span class="row__no">02</span>
+            <span class="row__thumb"><img src="assets/img/products/choux-afine-sm.webp" width="640" height="634" loading="lazy" decoding="async" alt="Choux cu craquelin roz, namelaka de căpșuni și afine proaspete deasupra"></span>
+            <span class="row__main">
+              <span class="row__cat">Choux</span>
+              <span class="row__name"><span class="row__name-in">Căpșuni &amp; afine</span></span>
+              <span class="row__desc">Namelaka de căpșuni, fină și aerată, cremă de vanilie cu coajă de lămâie și jeleu de afine.</span>
+            </span>
+            <span class="row__price">30<small>lei</small></span>
+            <span class="row__go">Comandă <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="row" data-img="2">
+          <a class="row__link" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20ciocolat%C4%83%20%26%20banane%20flambate" target="_blank" rel="noopener" aria-label="Comandă Choux Ciocolată &amp; banane flambate, 30 lei, pe WhatsApp">
+            <span class="row__no">03</span>
+            <span class="row__thumb"><img src="assets/img/products/choux-ciocolata-sm.webp" width="570" height="640" loading="lazy" decoding="async" alt="Choux de cacao cu cremă de ciocolată belgiană, compote de banane și floare comestibilă"></span>
+            <span class="row__main">
+              <span class="row__cat">Choux</span>
+              <span class="row__name"><span class="row__name-in">Ciocolată &amp; banane flambate</span></span>
+              <span class="row__desc">Aluat choux și craquelin cu cacao, cremă cu ciocolată belgiană, compote de banane coapte caramelizate.</span>
+            </span>
+            <span class="row__price">30<small>lei</small></span>
+            <span class="row__go">Comandă <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="row" data-img="3">
+          <a class="row__link" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20cocos%2C%20mango%20%26%20fructul%20pasiunii" target="_blank" rel="noopener" aria-label="Comandă Choux Cocos, mango &amp; fructul pasiunii, 30 lei, pe WhatsApp">
+            <span class="row__no">04</span>
+            <span class="row__thumb"><img src="assets/img/products/choux-zmeura-caise-sm.webp" width="632" height="640" loading="lazy" decoding="async" alt="Choux cu craquelin violet, namelaka de cocos și jeleu de mango cu fructul pasiunii, decorat cu petale roșii"></span>
+            <span class="row__main">
+              <span class="row__cat">Choux</span>
+              <span class="row__name"><span class="row__name-in">Cocos, mango &amp; fructul pasiunii</span></span>
+              <span class="row__desc">Namelaka de cocos, bezea cu cocos și jeleu cu mango, fructul pasiunii și busuioc.</span>
+            </span>
+            <span class="row__price">30<small>lei</small></span>
+            <span class="row__go">Comandă <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="row" data-img="4">
+          <a class="row__link" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Tart%C4%83%20cu%20mango%2C%20cocos%20%C8%99i%20fructul%20pasiunii" target="_blank" rel="noopener" aria-label="Comandă Tartă Mango, cocos &amp; fructul pasiunii, 35 lei, pe WhatsApp">
+            <span class="row__no">05</span>
+            <span class="row__thumb"><img src="assets/img/products/choux-mango-sm.webp" width="640" height="472" loading="lazy" decoding="async" alt="Tartă cu jeleu de mango în spirală, namelaka de cocos, bezea și fulgi de cocos"></span>
+            <span class="row__main">
+              <span class="row__cat">Tartă</span>
+              <span class="row__name"><span class="row__name-in">Mango, cocos &amp; fructul pasiunii</span></span>
+              <span class="row__desc">Sablé cu semințe de vanilie, namelaka de cocos, bezea cu cocos și jeleu cu mango și fructul pasiunii.</span>
+            </span>
+            <span class="row__price">35<small>lei</small></span>
+            <span class="row__go">Comandă <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+        <li class="row" data-img="5">
+          <a class="row__link" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Tart%C4%83%20tiramisu" target="_blank" rel="noopener" aria-label="Comandă Tartă Tiramisu, 32 lei, pe WhatsApp">
+            <span class="row__no">06</span>
+            <span class="row__thumb"><img src="assets/img/products/tarta-tiramisu-sm.webp" width="640" height="425" loading="lazy" decoding="async" alt="Tartă tiramisu alungită cu picuri de mascarpone pudrați cu cacao"></span>
+            <span class="row__main">
+              <span class="row__cat">Tartă</span>
+              <span class="row__name"><span class="row__name-in">Tiramisu</span></span>
+              <span class="row__desc">Sablé de cacao, pișcot artizanal, ganache de ciocolată cu cafea, mascarpone fin și cacao.</span>
+            </span>
+            <span class="row__price">32<small>lei</small></span>
+            <span class="row__go">Comandă <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </li>
+    </ol>
 
-      <article class="item" data-cat="choux">
-        <a class="item__media" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20cu%20c%C4%83p%C8%99uni%20%C8%99i%20afine" target="_blank" rel="noopener" data-cursor="Comandă" aria-label="Comandă Choux cu căpșuni și afine pe WhatsApp">
-          <span class="item__idx">02<i>/06</i></span>
-          <span class="item__tag">Choux</span>
-          <img src="assets/img/products/choux-afine-sm.webp" srcset="assets/img/products/choux-afine-sm.webp 1x, assets/img/products/choux-afine.webp 2x" width="640" height="634" loading="lazy" decoding="async" alt="Choux cu craquelin roz, namelaka de căpșuni și afine proaspete deasupra">
-        </a>
-        <div class="item__info">
-          <h3 class="item__name">Choux cu căpșuni și afine</h3>
-          <p class="item__desc">Namelaka de căpșuni, fină și aerată, cremă de vanilie cu coajă de lămâie și jeleu de afine.</p>
-          <div class="item__foot">
-            <p class="item__price"><span>30</span> lei</p>
-            <a class="item__order" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20cu%20c%C4%83p%C8%99uni%20%C8%99i%20afine" target="_blank" rel="noopener">Comandă<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a>
-          </div>
-        </div>
-      </article>
+    <p class="menu__after">Tort sau candy bar pentru un eveniment? <a class="ulink" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20un%20tort%20personalizat%20%F0%9F%8E%82" target="_blank" rel="noopener">Scrie-ne ce sărbătorești</a></p>
+  </section>
 
-      <article class="item" data-cat="choux">
-        <a class="item__media" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20ciocolat%C4%83%20%26%20banane%20flambate" target="_blank" rel="noopener" data-cursor="Comandă" aria-label="Comandă Choux ciocolată &amp; banane flambate pe WhatsApp">
-          <span class="item__idx">03<i>/06</i></span>
-          <span class="item__tag">Choux</span>
-          <img src="assets/img/products/choux-ciocolata-sm.webp" srcset="assets/img/products/choux-ciocolata-sm.webp 1x, assets/img/products/choux-ciocolata.webp 2x" width="570" height="640" loading="lazy" decoding="async" alt="Choux de cacao cu cremă de ciocolată belgiană, compote de banane și floare comestibilă">
-        </a>
-        <div class="item__info">
-          <h3 class="item__name">Choux ciocolată &amp; banane flambate</h3>
-          <p class="item__desc">Aluat choux și craquelin cu cacao, cremă cu ciocolată belgiană, compote de banane coapte caramelizate.</p>
-          <div class="item__foot">
-            <p class="item__price"><span>30</span> lei</p>
-            <a class="item__order" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20ciocolat%C4%83%20%26%20banane%20flambate" target="_blank" rel="noopener">Comandă<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a>
-          </div>
-        </div>
-      </article>
+  <!-- ATELIER -->
+  <section class="atelier" id="atelier">
+    <header class="sec-head">
+      <p class="sec-head__no">02</p>
+      <h2 class="sec-head__title" data-reveal>Atelier</h2>
+    </header>
+    <p class="atelier__text" data-words>Coacem în ture mici, cu cele mai bune ingrediente. Creme fine, fructe adevărate și craquelin crocant — iar fiecare cutie pleacă sigilată cu un <em>sărut</em>.</p>
 
-      <article class="item" data-cat="choux">
-        <a class="item__media" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20cocos%2C%20mango%20%26%20fructul%20pasiunii" target="_blank" rel="noopener" data-cursor="Comandă" aria-label="Comandă Choux cocos, mango &amp; fructul pasiunii pe WhatsApp">
-          <span class="item__idx">04<i>/06</i></span>
-          <span class="item__tag">Choux</span>
-          <img src="assets/img/products/choux-zmeura-caise-sm.webp" srcset="assets/img/products/choux-zmeura-caise-sm.webp 1x, assets/img/products/choux-zmeura-caise.webp 2x" width="632" height="640" loading="lazy" decoding="async" alt="Choux cu craquelin violet, namelaka de cocos și jeleu de mango cu fructul pasiunii, decorat cu petale roșii">
-        </a>
-        <div class="item__info">
-          <h3 class="item__name">Choux cocos, mango &amp; fructul pasiunii</h3>
-          <p class="item__desc">Namelaka de cocos, bezea cu cocos și jeleu cu mango, fructul pasiunii și busuioc.</p>
-          <div class="item__foot">
-            <p class="item__price"><span>30</span> lei</p>
-            <a class="item__order" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Choux%20cocos%2C%20mango%20%26%20fructul%20pasiunii" target="_blank" rel="noopener">Comandă<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <article class="item" data-cat="tarte">
-        <a class="item__media" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Tart%C4%83%20cu%20mango%2C%20cocos%20%C8%99i%20fructul%20pasiunii" target="_blank" rel="noopener" data-cursor="Comandă" aria-label="Comandă Tartă cu mango, cocos și fructul pasiunii pe WhatsApp">
-          <span class="item__idx">05<i>/06</i></span>
-          <span class="item__tag">Tartă</span>
-          <img src="assets/img/products/choux-mango-sm.webp" srcset="assets/img/products/choux-mango-sm.webp 1x, assets/img/products/choux-mango.webp 2x" width="640" height="472" loading="lazy" decoding="async" alt="Tartă cu jeleu de mango în spirală, namelaka de cocos, bezea și fulgi de cocos">
-        </a>
-        <div class="item__info">
-          <h3 class="item__name">Tartă cu mango, cocos și fructul pasiunii</h3>
-          <p class="item__desc">Sablé cu semințe de vanilie, namelaka de cocos, bezea cu cocos și jeleu cu mango și fructul pasiunii.</p>
-          <div class="item__foot">
-            <p class="item__price"><span>35</span> lei</p>
-            <a class="item__order" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Tart%C4%83%20cu%20mango%2C%20cocos%20%C8%99i%20fructul%20pasiunii" target="_blank" rel="noopener">Comandă<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <article class="item" data-cat="tarte">
-        <a class="item__media" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Tart%C4%83%20tiramisu" target="_blank" rel="noopener" data-cursor="Comandă" aria-label="Comandă Tartă tiramisu pe WhatsApp">
-          <span class="item__idx">06<i>/06</i></span>
-          <span class="item__tag">Tartă</span>
-          <img src="assets/img/products/tarta-tiramisu-sm.webp" srcset="assets/img/products/tarta-tiramisu-sm.webp 1x, assets/img/products/tarta-tiramisu.webp 2x" width="640" height="425" loading="lazy" decoding="async" alt="Tartă tiramisu alungită cu picuri de mascarpone pudrați cu cacao">
-        </a>
-        <div class="item__info">
-          <h3 class="item__name">Tartă tiramisu</h3>
-          <p class="item__desc">Sablé de cacao, pișcot artizanal, ganache de ciocolată cu cafea, mascarpone fin și cacao.</p>
-          <div class="item__foot">
-            <p class="item__price"><span>32</span> lei</p>
-            <a class="item__order" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%3A%20Tart%C4%83%20tiramisu" target="_blank" rel="noopener">Comandă<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a>
-          </div>
-        </div>
-      </article>
-    </div>
-
-    <div class="shop__note reveal">
-      <p class="shop__min">Comandă minimă <strong>100 lei</strong></p>
-      <a class="shop__cake" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20un%20tort%20personalizat%20%F0%9F%8E%82" target="_blank" rel="noopener"><span>Tort sau candy bar pentru un eveniment? <b>Scrie-ne ce sărbătorești</b></span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a>
+    <div class="atelier__pair">
+      <figure class="atelier__fig atelier__fig--a" data-par="-8"><img src="assets/img/products/choux-zmeura-caise.webp" width="751" height="760" loading="lazy" alt="Choux cu craquelin violet, namelaka de cocos și jeleu de mango"></figure>
+      <figure class="atelier__fig atelier__fig--b" data-par="10"><img src="assets/img/products/tarta-tiramisu.webp" width="1101" height="731" loading="lazy" alt="Tartă tiramisu cu picuri de mascarpone"></figure>
     </div>
   </section>
 
-  <!-- ▍CUM COMANZI -->
-  <section class="how" id="comanda">
-    <div class="how__panel">
-      <header class="how__head">
-        <p class="label label--light reveal">Cum comanzi</p>
-        <h2 class="reveal" data-words>Trei pași până la <em>desert</em>.</h2>
-      </header>
-      <ol class="how__steps">
-        <li class="how__step">
-          <span class="how__num">01</span>
-          <h3>Alegi desertul</h3>
-          <p>Din vitrina zilei, sau un tort gândit special pentru evenimentul tău.</p>
-        </li>
-        <li class="how__step">
-          <span class="how__num">02</span>
-          <h3>Ne scrii pe WhatsApp</h3>
-          <p>Spui data, numărul de porții și povestea din spatele ocaziei.</p>
-        </li>
-        <li class="how__step">
-          <span class="how__num">03</span>
-          <h3>Îl ridici proaspăt</h3>
-          <p>Îl pregătim chiar în ziua întâlnirii, ambalat frumos, gata de sărbătoare.</p>
-        </li>
-      </ol>
-      <div class="how__foot reveal">
-        <a class="btn btn--pink btn--lg" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5v-.5L9.6 8.2c-.2-.4-.4-.4-.7-.4Z"/></svg><span>Scrie-ne pe WhatsApp</span></a>
-        <p>Comandă minimă 100 lei · Răspundem cu drag</p>
-      </div>
-      <img class="how__seal" src="assets/img/stickers/seal.webp" alt="" width="140" height="136" loading="lazy">
-    </div>
+  <!-- COMANDA -->
+  <section class="order" id="comanda">
+    <header class="sec-head">
+      <p class="sec-head__no">03</p>
+      <h2 class="sec-head__title" data-reveal>Cum comanzi</h2>
+    </header>
+    <ol class="steps">
+      <li><span>i.</span><h3>Alegi desertul</h3><p>Din vitrina zilei, sau un tort gândit pentru evenimentul tău.</p></li>
+      <li><span>ii.</span><h3>Ne scrii pe WhatsApp</h3><p>Spui data, numărul de porții și povestea din spatele ocaziei.</p></li>
+      <li><span>iii.</span><h3>Îl ridici proaspăt</h3><p>Pregătit chiar în ziua întâlnirii, ambalat frumos.</p></li>
+    </ol>
   </section>
 
-  <!-- ▍MANIFEST -->
-  <section class="manifest">
-    <p class="manifest__text" data-scrub>Coacem în ture mici <span class="pimg"><img src="assets/img/products/choux-vanilie-zmeura-sm.webp" alt="" width="80" height="80" loading="lazy"></span> cu cele mai bune ingrediente. Creme fine, fructe adevărate <span class="pimg pimg--pink"><img src="assets/img/products/choux-afine-sm.webp" alt="" width="80" height="80" loading="lazy"></span> și craquelin crocant — iar fiecare cutie pleacă sigilată cu un <em>sărut</em> <span class="pimg pimg--kiss"><img src="assets/img/stickers/kiss.webp" alt="" width="80" height="80" loading="lazy"></span></p>
-  </section>
-
-  <!-- ▍CTA -->
-  <section class="cta" id="contact">
-    <p class="label reveal">Comenzi deschise</p>
-    <h2 class="cta__title" data-words>Poftă de ceva <em>dulce</em>?</h2>
-    <p class="cta__sub reveal">Scrie-ne pe WhatsApp: stabilim împreună desertul, data și ridicarea.</p>
-
-    <a class="orb" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener" aria-label="Comandă pe WhatsApp">
-      <svg class="orb__ring" viewBox="0 0 200 200" aria-hidden="true">
-        <defs><path id="orbtxt" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs>
-        <text><textPath href="#orbtxt" textLength="500" lengthAdjust="spacingAndGlyphs">COMANDĂ PE WHATSAPP ✦ RĂSPUNDEM CU DRAG ✦ COMANDĂ PE WHATSAPP ✦ RĂSPUNDEM CU DRAG ✦&nbsp;</textPath></text>
-      </svg>
-      <span class="orb__core"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5v-.5L9.6 8.2c-.2-.4-.4-.4-.7-.4Z"/></svg><b>Comandă</b></span>
+  <!-- CTA -->
+  <section class="cta">
+    <p class="cta__kicker">Poftă de ceva dulce?</p>
+    <a class="cta__big" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener">
+      <span class="cta__line"><span>Comandă</span></span>
+      <span class="cta__line"><span><em>pe WhatsApp</em><i class="cta__arrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></i></span></span>
     </a>
-
-    <a class="cta__tel" href="tel:+40736619631">sau sună la <strong>+40 736 619 631</strong></a>
-
-    <img class="cta__sticker cta__sticker--seal" src="assets/img/stickers/seal.webp" alt="" width="140" height="136" loading="lazy">
-    <img class="cta__sticker cta__sticker--kiss" src="assets/img/stickers/kiss.webp" alt="" width="110" height="110" loading="lazy">
+    <p class="cta__tel">sau sună la <a class="ulink" href="tel:+40736619631">+40 736 619 631</a></p>
   </section>
 </main>
 
 <footer class="footer">
-  <div class="footer__top">
-    <div class="footer__brand">
-      <img src="assets/img/logo-sm.webp" alt="The Lex" width="360" height="138" loading="lazy">
-      <p>Cofetărie artizanală. Choux à la craquelin și tarte fine, făcute de mână, în ture mici.</p>
-    </div>
-    <div class="footer__col">
-      <h3>Comenzi</h3>
-      <a href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener">WhatsApp</a>
-      <a href="tel:+40736619631">+40 736 619 631</a>
-    </div>
-    <div class="footer__col">
-      <h3>Pagina</h3>
-      <a href="#vitrina">Vitrina</a>
-      <a href="#comanda">Cum comanzi</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="footer__col">
-      <h3>Bine de știut</h3>
-      <p>Comandă minimă <b>100</b> lei</p>
-      <p>Choux <b>30</b> lei · Tarte de la <b>32</b> lei</p>
-    </div>
-  </div>
-  <div class="footer__bottom">
+  <img class="footer__logo" src="assets/img/logo.webp" alt="The Lex" width="1220" height="468" loading="lazy">
+  <div class="footer__row">
     <p>© <span id="year">2026</span> The Lex Bakehouse</p>
-    <p>Făcut cu drag</p>
-    <a class="footer__up" href="#top">Înapoi sus <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 20V7.8l-4.6 4.6L5 11l7-7 7 7-1.4 1.4L13 7.8V20z"/></svg></a>
+    <p>Comandă minimă 100 lei</p>
+    <a class="ulink" href="#top">Înapoi sus</a>
   </div>
-  <img class="footer__giant" src="assets/img/logo.webp" alt="" width="1220" height="468" loading="lazy" aria-hidden="true">
 </footer>
 
-<a class="dock" href="https://wa.me/40736619631?text=Bun%C4%83!%20A%C8%99%20dori%20s%C4%83%20comand%20de%20la%20The%20Lex%20Bakehouse%20%F0%9F%8E%80" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5v-.5L9.6 8.2c-.2-.4-.4-.4-.7-.4Z"/></svg><span>Comandă pe WhatsApp</span><small>min. 100 lei</small></a>
+<div class="preview" aria-hidden="true">
+  <div class="preview__inner">
+      <img src="assets/img/products/choux-vanilie-zmeura.webp" width="603" height="640" alt="" loading="lazy" decoding="async">
+      <img src="assets/img/products/choux-afine.webp" width="640" height="634" alt="" loading="lazy" decoding="async">
+      <img src="assets/img/products/choux-ciocolata.webp" width="570" height="640" alt="" loading="lazy" decoding="async">
+      <img src="assets/img/products/choux-zmeura-caise.webp" width="632" height="640" alt="" loading="lazy" decoding="async">
+      <img src="assets/img/products/choux-mango.webp" width="640" height="472" alt="" loading="lazy" decoding="async">
+      <img src="assets/img/products/tarta-tiramisu.webp" width="640" height="425" alt="" loading="lazy" decoding="async">
+  </div>
+</div>
 
 <script src="assets/js/vendor/gsap.min.js" defer></script>
 <script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/vendor/SplitText.min.js" defer></script>
-<script src="assets/js/vendor/Flip.min.js" defer></script>
 <script src="assets/js/vendor/lenis.min.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
