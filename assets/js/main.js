@@ -1,301 +1,440 @@
-/* The Lex Bakehouse — v3 motion engine
-   Lenis smooth scroll + GSAP (ScrollTrigger, SplitText)
-   Totul cade elegant înapoi: fără JS sau cu reduced-motion,
-   conținutul e complet vizibil și static. */
+/* The Lex Bakehouse — v4 interactions
+   GSAP (ScrollTrigger, SplitText, Flip) + Lenis.
+   Fără JS sau cu reduced-motion: pagina e completă și statică,
+   caruselul și filtrele funcționează fără animație. */
 (function () {
   "use strict";
 
   var html = document.documentElement;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine = window.matchMedia("(pointer: fine)").matches;
-  var hasGsap = typeof window.gsap !== "undefined";
+  var full = !reduce && typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined" &&
+             typeof window.Lenis !== "undefined" && typeof window.SplitText !== "undefined";
 
-  function showEverything() {
-    html.classList.add("loaded");
-    if (hasGsap) {
-      gsap.set(".reveal,[data-words],.card,.cta__panel,.statement__kiss,.hero__eyebrow,.hero__logo,.hero__bakehouse,.hero__lead,.hero__cta,.hero__float,.badge,.hero__scroll", { clearProps: "all", autoAlpha: 1 });
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
+  /* ============================================================
+     Componente comune (merg și fără GSAP)
+     ============================================================ */
+
+  /* ---- carusel hero ---- */
+  function initShow(animate) {
+    var show = $("[data-show]");
+    if (!show) return null;
+    var imgs = $$(".show__img", show);
+    var countEl = $(".show__count b", show);
+    var nameEl = $(".show__name", show);
+    var priceEl = $(".show__price", show);
+    var bar = $(".show__progress i", show);
+    var i = 0, busy = false, timer = null, prog = null, paused = false;
+    var DUR = 4.6;
+
+    function caption(k) {
+      var d = imgs[k].dataset;
+      var set = function () {
+        countEl.textContent = String(k + 1).padStart(2, "0");
+        nameEl.textContent = d.name;
+        nameEl.href = d.href;
+        priceEl.textContent = d.price;
+      };
+      if (!animate) return set();
+      gsap.timeline()
+        .to([nameEl, priceEl, countEl], { yPercent: -60, autoAlpha: 0, duration: 0.22, ease: "power2.in", stagger: 0.03 })
+        .add(set)
+        .fromTo([nameEl, priceEl, countEl], { yPercent: 60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "expo.out", stagger: 0.04 });
     }
-    var act = document.querySelector(".steps__media img");
-    if (act) act.classList.add("is-active");
+
+    function go(dir, to) {
+      if (busy) return;
+      var next = typeof to === "number" ? to : (i + dir + imgs.length) % imgs.length;
+      if (next === i) return;
+      var out = imgs[i], inn = imgs[next];
+      i = next;
+      caption(next);
+      if (!animate) {
+        out.classList.remove("is-active");
+        inn.classList.add("is-active");
+        return;
+      }
+      busy = true;
+      gsap.set(inn, { autoAlpha: 1 });
+      inn.classList.add("is-active");
+      gsap.timeline({ onComplete: function () { out.classList.remove("is-active"); busy = false; } })
+        .to(out, { xPercent: -55 * dir, rotation: -14 * dir, scale: 0.78, autoAlpha: 0, duration: 0.75, ease: "power3.inOut" })
+        .fromTo(inn, { xPercent: 55 * dir, rotation: 14 * dir, scale: 0.78, autoAlpha: 0 },
+                     { xPercent: 0, rotation: 0, scale: 1, autoAlpha: 1, duration: 0.95, ease: "expo.out" }, 0.18);
+      restart();
+    }
+
+    function restart() {
+      if (!animate) return;
+      if (prog) prog.kill();
+      gsap.set(bar, { scaleX: 0 });
+      prog = gsap.to(bar, { scaleX: 1, duration: DUR, ease: "none", paused: paused, onComplete: function () { go(1); } });
+    }
+
+    $$(".show__btn", show).forEach(function (b) {
+      b.addEventListener("click", function () { go(parseInt(b.dataset.dir, 10)); });
+    });
+    show.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") go(1);
+      if (e.key === "ArrowLeft") go(-1);
+    });
+
+    if (animate) {
+      var pause = function () { paused = true; if (prog) prog.pause(); };
+      var play = function () { paused = false; if (prog) prog.play(); };
+      show.addEventListener("mouseenter", pause);
+      show.addEventListener("mouseleave", play);
+      show.addEventListener("focusin", pause);
+      show.addEventListener("focusout", play);
+      document.addEventListener("visibilitychange", function () { document.hidden ? pause() : play(); });
+
+      /* swipe pe mobil */
+      var sx = null;
+      show.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true });
+      show.addEventListener("touchend", function (e) {
+        if (sx === null) return;
+        var dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+        sx = null;
+      });
+    }
+    return { start: restart };
   }
 
-  /* ------------------------------------------------------------
-     Fallback total: fără GSAP sau cu reduced-motion
-     ------------------------------------------------------------ */
+  /* ---- filtre vitrină ---- */
+  function initTabs(animate) {
+    var tabs = $(".tabs");
+    if (!tabs) return;
+    var pill = $(".tabs__pill", tabs);
+    var btns = $$(".tabs__btn", tabs);
+    var items = $$(".item");
+
+    function placePill(btn) {
+      pill.style.left = btn.offsetLeft + "px";
+      pill.style.width = btn.offsetWidth + "px";
+    }
+    var active = $(".tabs__btn.is-active", tabs);
+    placePill(active);
+    window.addEventListener("resize", function () { placePill($(".tabs__btn.is-active", tabs)); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placePill($(".tabs__btn.is-active", tabs)); });
+
+    btns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (btn.classList.contains("is-active")) return;
+        btns.forEach(function (b) { b.classList.toggle("is-active", b === btn); b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+        placePill(btn);
+        var f = btn.dataset.filter;
+        var state = animate && window.Flip ? Flip.getState(items) : null;
+        items.forEach(function (it) { it.classList.toggle("is-hidden", f !== "all" && it.dataset.cat !== f); });
+        if (state) {
+          Flip.from(state, {
+            duration: 0.75, ease: "expo.inOut", absolute: true, scale: true,
+            onEnter: function (els) { return gsap.fromTo(els, { autoAlpha: 0, scale: 0.9, y: 30 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out", delay: 0.15 }); },
+            onLeave: function (els) { return gsap.to(els, { autoAlpha: 0, scale: 0.9, duration: 0.35, ease: "power2.in" }); },
+            onComplete: function () { ScrollTrigger.refresh(); }
+          });
+        }
+      });
+    });
+  }
+
+  /* ---- dock mobil ---- */
+  function initDock(getY) {
+    var dock = $(".dock");
+    var hero = $(".hero");
+    var cta = $(".cta");
+    var footer = $(".footer");
+    if (!dock || !hero) return function () {};
+    return function () {
+      var y = getY();
+      var heroEnd = hero.offsetTop + hero.offsetHeight - 80;
+      var vh = window.innerHeight;
+      var ctaTop = cta ? cta.getBoundingClientRect().top : Infinity;
+      var footTop = footer ? footer.getBoundingClientRect().top : Infinity;
+      var nearEnd = ctaTop < vh * 0.75 && footTop > -1e9;
+      dock.classList.toggle("is-on", y > heroEnd && !nearEnd);
+    };
+  }
+
+  /* ============================================================
+     Varianta statică
+     ============================================================ */
   function initLite() {
-    showEverything();
-    var progress = document.querySelector(".progress i");
-    var nav = document.querySelector(".nav");
-    window.addEventListener("scroll", function () {
-      var doc = document.documentElement;
-      var max = doc.scrollHeight - window.innerHeight;
+    html.classList.add("loaded");
+    initShow(false);
+    initTabs(false);
+    var progress = $(".progress i");
+    var nav = $(".nav");
+    var dock = initDock(function () { return window.scrollY; });
+    function onScroll() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
       if (progress) progress.style.transform = "scaleX(" + (max > 0 ? window.scrollY / max : 0) + ")";
-      if (nav) nav.classList.toggle("scrolled", window.scrollY > 30);
-    }, { passive: true });
+      if (nav) nav.classList.toggle("scrolled", window.scrollY > 10);
+      dock();
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
   }
 
-  /* ------------------------------------------------------------
+  /* ============================================================
      Experiența completă
-     ------------------------------------------------------------ */
+     ============================================================ */
   function initFull() {
     gsap.registerPlugin(ScrollTrigger, SplitText);
-    gsap.defaults({ ease: "power3.out" });
+    if (window.Flip) gsap.registerPlugin(Flip);
+    gsap.defaults({ ease: "expo.out", duration: 0.9 });
 
-    /* ---- Lenis smooth scroll ---- */
-    var lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1, smoothWheel: true });
+    /* ---- Lenis ---- */
+    var lenis = new Lenis({ lerp: 0.095, smoothWheel: true, wheelMultiplier: 0.95 });
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
     gsap.ticker.lagSmoothing(0);
     lenis.stop();
 
-    /* ---- ancore interne prin Lenis ---- */
-    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    $$('a[href^="#"]').forEach(function (a) {
       a.addEventListener("click", function (e) {
         var id = a.getAttribute("href");
         if (id.length < 2) return;
-        var target = document.querySelector(id);
-        if (!target) return;
+        var t = $(id);
+        if (!t) return;
         e.preventDefault();
-        lenis.scrollTo(target, { offset: -72, duration: 1.3, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+        lenis.scrollTo(id === "#top" ? 0 : t, { offset: -70, duration: 1.4, easing: function (x) { return 1 - Math.pow(1 - x, 4); } });
       });
     });
 
-    /* ---- bara de progres + nav retractabil + stingerea scroll-cue ---- */
-    var progressEl = document.querySelector(".progress i");
-    var setProgress = progressEl ? gsap.quickSetter(progressEl, "scaleX") : null;
-    var nav = document.querySelector(".nav");
-    var cue = document.querySelector(".hero__scroll");
+    /* ---- scroll: progres, nav, dock ---- */
+    var setProg = gsap.quickSetter(".progress i", "scaleX");
+    var nav = $(".nav");
+    var topbarH = ($(".topbar") || { offsetHeight: 0 }).offsetHeight;
     var lastY = 0;
-    function onScrollFrame(y) {
-      var doc = document.documentElement;
-      var max = doc.scrollHeight - window.innerHeight;
-      if (setProgress) setProgress(max > 0 ? y / max : 0);
-      if (nav) {
-        nav.classList.toggle("scrolled", y > 30);
-        if (y > 140 && y > lastY + 4) nav.classList.add("nav--hidden");
-        else if (y < lastY - 4 || y < 140) nav.classList.remove("nav--hidden");
-      }
-      if (cue) cue.style.opacity = y > 80 ? 0 : 1;
+    var currentY = 0;
+    var dock = initDock(function () { return currentY; });
+    lenis.on("scroll", function (e) {
+      var y = e.scroll;
+      currentY = y;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      setProg(max > 0 ? y / max : 0);
+      nav.classList.toggle("scrolled", y > topbarH + 4);
+      if (y > 260 && y > lastY + 3) nav.classList.add("nav--hidden");
+      else if (y < lastY - 3 || y < 260) nav.classList.remove("nav--hidden");
       lastY = y;
+      dock();
+    });
+
+    /* ---- componente ---- */
+    var show = initShow(true);
+    initTabs(true);
+
+    /* ---- stări inițiale hero ---- */
+    var h1 = $(".hero__title");
+    var h1Split = SplitText.create(h1, { type: "words", mask: "words" });
+    gsap.set(h1Split.words, { yPercent: 110 });
+    gsap.set(".hero__eyebrow,.hero__lead,.hero__cta,.hero__facts", { autoAlpha: 0, y: 24 });
+    gsap.set(".show__arch", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 34px 34px)" });
+    gsap.set(".show__img.is-active", { scale: 0.7, yPercent: 18, autoAlpha: 0 });
+    gsap.set(".show__caption", { autoAlpha: 0, y: 20 });
+    gsap.set(".badge", { autoAlpha: 0, scale: 0.5, rotation: -40 });
+
+    function heroIntro() {
+      return gsap.timeline()
+        .to(".hero__eyebrow", { autoAlpha: 1, y: 0, duration: 0.8 })
+        .to(h1Split.words, { yPercent: 0, duration: 1.15, stagger: 0.055 }, 0.05)
+        .to(".show__arch", { clipPath: "inset(0% 0% 0% 0% round 999px 999px 34px 34px)", duration: 1.35, ease: "expo.inOut" }, 0.1)
+        .to(".show__img.is-active", { scale: 1, yPercent: 0, autoAlpha: 1, duration: 1.2 }, 0.75)
+        .to(".hero__lead", { autoAlpha: 1, y: 0 }, 0.6)
+        .to(".hero__cta", { autoAlpha: 1, y: 0 }, 0.72)
+        .to(".hero__facts", { autoAlpha: 1, y: 0 }, 0.84)
+        .to(".show__caption", { autoAlpha: 1, y: 0 }, 1.05)
+        .to(".badge", { autoAlpha: 1, scale: 1, rotation: 0, duration: 1.1, ease: "back.out(1.6)" }, 1.1)
+        .add(function () { if (show) show.start(); });
     }
-    lenis.on("scroll", function (e) { onScrollFrame(e.scroll); });
 
-    /* ---- stări inițiale (loader-ul acoperă primul cadru) ---- */
-    gsap.set(".hero__eyebrow,.hero__bakehouse,.hero__lead,.hero__cta,.hero__scroll", { autoAlpha: 0, y: 22 });
-    gsap.set(".hero__logo", { autoAlpha: 0, y: 34, scale: 0.985, clipPath: "inset(0% 0% 100% 0%)" });
-    gsap.set(".hero__float", { autoAlpha: 0, scale: 0.72 });
-    gsap.set(".badge", { autoAlpha: 0, scale: 0.6 });
-
-    /* ---- preloader ---- */
-    var loader = document.querySelector(".loader");
+    /* ---- loader ---- */
+    var loader = $(".loader");
     var seen = false;
     try { seen = sessionStorage.getItem("lex-seen") === "1"; } catch (e) {}
-    function heroIntro() {
-      var tl = gsap.timeline({ defaults: { ease: "expo.out" } });
-      tl.to(".hero__eyebrow", { autoAlpha: 1, y: 0, duration: 0.7 })
-        .to(".hero__logo", { autoAlpha: 1, y: 0, scale: 1, clipPath: "inset(0% 0% -8% 0%)", duration: 1.15 }, 0.08)
-        .set(".hero__logo", { clearProps: "clipPath" })
-        .fromTo(".hero__bakehouse", { autoAlpha: 0, letterSpacing: "0.95em" }, { autoAlpha: 1, letterSpacing: "0.55em", duration: 1.05, clearProps: "letterSpacing" }, 0.5)
-        .to(".hero__lead", { autoAlpha: 1, y: 0, duration: 0.8 }, 0.72)
-        .to(".hero__cta", { autoAlpha: 1, y: 0, duration: 0.8 }, 0.84)
-        .to(".hero__float", { autoAlpha: 1, scale: 1, duration: 0.9, ease: "back.out(1.5)", stagger: 0.12 }, 0.55)
-        .to(".badge", { autoAlpha: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }, 1.0)
-        .to(".hero__scroll", { autoAlpha: 1, y: 0, duration: 0.7 }, 1.15);
-      return tl;
+    var intro = gsap.timeline({
+      onComplete: function () { lenis.start(); try { sessionStorage.setItem("lex-seen", "1"); } catch (e) {} }
+    });
+    if (loader && !seen) {
+      intro.fromTo(".loader__logo", { autoAlpha: 0, y: 12, scale: 0.94 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.7 })
+           .to(".loader__bar i", { scaleX: 1, duration: 0.85, ease: "power2.inOut" }, 0.1)
+           .to(".loader__inner", { autoAlpha: 0, y: -16, duration: 0.4, ease: "power2.in" }, "+=0.1")
+           .to(loader, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.85, ease: "expo.inOut" }, "-=0.1")
+           .add(function () { html.classList.add("loaded"); })
+           .add(heroIntro(), "-=0.45");
+    } else {
+      if (loader) intro.to(loader, { autoAlpha: 0, duration: 0.35, ease: "power2.out" });
+      intro.add(function () { html.classList.add("loaded"); }).add(heroIntro(), "-=0.15");
     }
-    function dismissLoader() {
-      var tl = gsap.timeline({
-        onComplete: function () {
-          html.classList.add("loaded");
-          lenis.start();
-          try { sessionStorage.setItem("lex-seen", "1"); } catch (e) {}
+
+    /* ---- hero: parallax + înclinare la mouse ---- */
+    var heroST = { trigger: ".hero", start: "top top", end: "bottom top", scrub: true };
+    gsap.to(".show", { yPercent: 10, scrollTrigger: heroST });
+    gsap.to(".hero__copy", { yPercent: -6, autoAlpha: 0.35, scrollTrigger: heroST });
+    if (fine) {
+      var stage = $(".show__stage");
+      var arch = $(".show__arch");
+      var sx = gsap.quickTo(stage, "x", { duration: 0.8, ease: "power3.out" });
+      var sy = gsap.quickTo(stage, "y", { duration: 0.8, ease: "power3.out" });
+      var sr = gsap.quickTo(stage, "rotation", { duration: 0.8, ease: "power3.out" });
+      arch.addEventListener("mousemove", function (e) {
+        var r = arch.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        sx(px * 26); sy(py * 18); sr(px * 5);
+      });
+      arch.addEventListener("mouseleave", function () { sx(0); sy(0); sr(0); });
+    }
+
+    /* ---- marquee reactiv la viteza scroll-ului ---- */
+    var mq = $(".mq");
+    if (mq) {
+      mq.classList.add("is-gsap");
+      var loop = gsap.to(".mq__track", { xPercent: -50, duration: 46, ease: "none", repeat: -1 });
+      var speed = { v: 1 };
+      ScrollTrigger.create({
+        trigger: mq, start: "top bottom", end: "bottom top",
+        onUpdate: function (self) {
+          var v = Math.min(Math.abs(self.getVelocity()) / 260, 6);
+          var dir = self.direction;
+          gsap.to(speed, { v: (1 + v) * dir, duration: 0.25, overwrite: true,
+            onUpdate: function () { loop.timeScale(speed.v); } });
+          gsap.to(speed, { v: dir, duration: 1.4, delay: 0.25, ease: "power2.out", overwrite: false,
+            onUpdate: function () { loop.timeScale(speed.v); } });
         }
       });
-      if (!loader) return tl;
-      if (seen) {
-        tl.to(loader, { autoAlpha: 0, duration: 0.4, ease: "power2.out" });
-      } else {
-        tl.fromTo(".loader__logo", { autoAlpha: 0, scale: 0.9, y: 10 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.6, ease: "expo.out" })
-          .to(".loader__bar i", { scaleX: 1, duration: 0.8, ease: "power2.inOut" }, 0.1)
-          .to(loader, { yPercent: -100, duration: 0.75, ease: "expo.inOut" }, "+=0.12");
-      }
-      return tl;
     }
-    gsap.timeline().add(dismissLoader()).add(heroIntro(), seen ? "-=0.1" : "-=0.35");
 
-    /* ---- parallax în hero ---- */
-    var heroST = { trigger: ".hero", start: "top top", end: "bottom top", scrub: true };
-    gsap.to(".hero__float--1", { yPercent: -16, scrollTrigger: heroST });
-    gsap.to(".hero__float--2", { yPercent: -26, scrollTrigger: heroST });
-    gsap.to(".hero__float--3", { yPercent: -12, scrollTrigger: heroST });
-    gsap.to(".hero__logo", { yPercent: 9, scale: 0.975, transformOrigin: "50% 0%", scrollTrigger: heroST });
-    gsap.to(".hero__eyebrow,.hero__lead", { autoAlpha: 0.25, scrollTrigger: { trigger: ".hero", start: "20% top", end: "bottom top", scrub: true } });
-
-    /* ---- reveal generic (fără titlurile cu data-words) ---- */
-    gsap.utils.toArray(".reveal:not([data-words])").forEach(function (el) {
-      gsap.fromTo(el, { autoAlpha: 0, y: 36 }, {
-        autoAlpha: 1, y: 0, duration: 0.9,
-        scrollTrigger: { trigger: el, start: "top 88%" }
-      });
+    /* ---- reveal-uri ---- */
+    $$(".reveal").forEach(function (el) {
+      if (el.hasAttribute("data-words")) return;
+      gsap.fromTo(el, { autoAlpha: 0, y: 34 }, { autoAlpha: 1, y: 0, scrollTrigger: { trigger: el, start: "top 90%" } });
+    });
+    $$("[data-words]").forEach(function (el) {
+      var s = SplitText.create(el, { type: "words", mask: "words" });
+      gsap.set(el, { autoAlpha: 1, y: 0 });
+      gsap.from(s.words, { yPercent: 115, duration: 1.05, stagger: 0.06, scrollTrigger: { trigger: el, start: "top 88%" } });
     });
 
-    /* ---- titluri: cuvinte mascate ---- */
-    document.querySelectorAll("[data-words]").forEach(function (el) {
-      var split = SplitText.create(el, { type: "words", mask: "words" });
-      gsap.set(el, { autoAlpha: 1 });
-      gsap.from(split.words, {
-        yPercent: 125, duration: 0.9, ease: "expo.out", stagger: 0.045,
-        scrollTrigger: { trigger: el, start: "top 86%" }
-      });
-    });
-
-    /* ---- vitrina: carduri în cascadă ---- */
-    gsap.set(".card", { autoAlpha: 0, y: 44 });
-    ScrollTrigger.batch(".card", {
-      start: "top 90%",
-      onEnter: function (batch) {
-        gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.95, ease: "expo.out", stagger: 0.09, overwrite: true });
-      }
-    });
-
-    /* ---- statement: cuvinte + sărutul ---- */
-    var st = document.querySelector(".statement__text");
-    if (st) {
-      var stSplit = SplitText.create(st, { type: "words", mask: "words" });
-      var kiss = document.querySelector(".statement__kiss");
-      if (kiss) gsap.set(kiss, { autoAlpha: 0, scale: 0.2, rotation: 28 });
-      var stTl = gsap.timeline({ scrollTrigger: { trigger: st, start: "top 80%" } });
-      stTl.from(stSplit.words, { yPercent: 125, duration: 0.85, ease: "expo.out", stagger: 0.032 });
-      if (kiss) stTl.to(kiss, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.7, ease: "back.out(2.4)" }, "-=0.25");
-    }
-
-    /* ---- CTA panel ---- */
-    var panel = document.querySelector(".cta__panel");
-    if (panel) {
-      gsap.set(panel, { autoAlpha: 0, y: 64, scale: 0.985 });
-      gsap.to(panel, {
-        autoAlpha: 1, y: 0, scale: 1, duration: 1.1, ease: "expo.out",
-        scrollTrigger: { trigger: ".cta", start: "top 82%" }
-      });
-    }
-
-    /* ---- footer: logo-ul gigant urcă ușor ---- */
-    var giant = document.querySelector(".footer__giant");
-    if (giant) {
-      gsap.fromTo(giant, { yPercent: 30 }, {
-        yPercent: 4, ease: "none",
-        scrollTrigger: { trigger: ".footer", start: "top bottom", end: "bottom bottom", scrub: true }
-      });
-    }
-
-    /* ---- Cum comanzi: pin + scrub pe desktop ---- */
-    var steps = document.querySelector(".steps");
-    if (steps) {
-      var items = gsap.utils.toArray(".step");
-      var photos = gsap.utils.toArray(".steps__media img");
-      var bar = document.querySelector(".steps__bar i");
-      var setBar = bar ? gsap.quickSetter(bar, "scaleX") : null;
-      var current = -1;
-      function setActive(i) {
-        if (i === current) return;
-        current = i;
-        items.forEach(function (el, k) { el.classList.toggle("is-active", k === i); });
-        photos.forEach(function (el, k) {
-          gsap.to(el, { autoAlpha: k === i ? 1 : 0, scale: k === i ? 1 : 1.04, duration: 0.5, ease: "power2.out", overwrite: true });
+    /* ---- vitrina: carduri ---- */
+    gsap.set(".item", { autoAlpha: 0, y: 60 });
+    ScrollTrigger.batch(".item", {
+      start: "top 92%",
+      onEnter: function (b) {
+        gsap.to(b, { autoAlpha: 1, y: 0, duration: 1.1, stagger: 0.1, overwrite: true });
+        b.forEach(function (it) {
+          var img = $("img", $(".item__media", it));
+          gsap.fromTo(img, { scale: 0.82, rotation: 6 }, { scale: 1, rotation: 0, duration: 1.4, clearProps: "transform" });
         });
       }
-      ScrollTrigger.matchMedia({
-        "(min-width: 900px)": function () {
-          setActive(0);
-          ScrollTrigger.create({
-            trigger: steps,
-            start: "top top",
-            end: "+=170%",
-            pin: ".steps__pin",
-            onUpdate: function (self) {
-              if (setBar) setBar(self.progress);
-              setActive(self.progress < 1 / 3 ? 0 : self.progress < 2 / 3 ? 1 : 2);
-            }
-          });
-        },
-        "(max-width: 899px)": function () {
-          items.forEach(function (el) {
-            gsap.fromTo(el, { autoAlpha: 0, y: 30 }, {
-              autoAlpha: 1, y: 0, duration: 0.8,
-              scrollTrigger: { trigger: el, start: "top 90%" }
-            });
-          });
-        }
+    });
+
+    /* ---- panou navy ---- */
+    gsap.fromTo(".how__panel", { clipPath: "inset(8% 4% 8% 4% round 40px)" }, {
+      clipPath: "inset(0% 0% 0% 0% round 40px)", ease: "none",
+      scrollTrigger: { trigger: ".how", start: "top 95%", end: "top 35%", scrub: true }
+    });
+    $$(".how__step").forEach(function (st, k) {
+      gsap.fromTo(st, { autoAlpha: 0, y: 40 }, {
+        autoAlpha: 1, y: 0, delay: k * 0.08,
+        scrollTrigger: { trigger: ".how__steps", start: "top 82%", onEnter: function () { setTimeout(function () { st.classList.add("is-in"); }, 300 + k * 160); } }
       });
+    });
+    gsap.fromTo(".how__seal", { rotation: -30, scale: 0.6, autoAlpha: 0 }, {
+      rotation: 12, scale: 1, autoAlpha: 1, duration: 1.2, ease: "back.out(1.8)",
+      scrollTrigger: { trigger: ".how__panel", start: "top 60%" }
+    });
+
+    /* ---- manifest: cuvintele se aprind la scroll ---- */
+    var man = $("[data-scrub]");
+    if (man) {
+      var ms = SplitText.create(man, { type: "words" });
+      var tokens = ms.words.concat($$(".pimg", man));
+      tokens.sort(function (a, b) { return a.compareDocumentPosition(b) & 2 ? 1 : -1; });
+      gsap.set(tokens, { opacity: 0.14 });
+      gsap.set($$(".pimg", man), { scale: 0.6 });
+      gsap.timeline({ scrollTrigger: { trigger: man, start: "top 78%", end: "bottom 42%", scrub: 0.6 } })
+        .to(tokens, { opacity: 1, stagger: 0.12, ease: "none", duration: 0.5 })
+        .to($$(".pimg", man), { scale: 1, stagger: 0.5, ease: "back.out(2)", duration: 0.6 }, 0);
     }
 
-    /* ---- link activ în nav ---- */
-    [["#vitrina", 'a[href="#vitrina"]'], ["#comanda", 'a[href="#comanda"]'], ["#contact", 'a[href="#contact"]']].forEach(function (pair) {
-      var sec = document.querySelector(pair[0]);
-      var link = document.querySelector(".nav__links " + pair[1]);
+    /* ---- CTA ---- */
+    gsap.fromTo(".orb", { scale: 0.6, autoAlpha: 0, rotation: -60 }, {
+      scale: 1, autoAlpha: 1, rotation: 0, duration: 1.4, ease: "back.out(1.4)",
+      scrollTrigger: { trigger: ".orb", start: "top 92%" }
+    });
+    gsap.to(".cta__sticker--seal", { yPercent: -60, rotation: 8, ease: "none", scrollTrigger: { trigger: ".cta", start: "top bottom", end: "bottom top", scrub: true } });
+    gsap.to(".cta__sticker--kiss", { yPercent: -110, rotation: -6, ease: "none", scrollTrigger: { trigger: ".cta", start: "top bottom", end: "bottom top", scrub: true } });
+
+    /* ---- footer ---- */
+    gsap.fromTo(".footer__giant", { yPercent: 40 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: ".footer", start: "top bottom", end: "bottom bottom", scrub: true } });
+    gsap.fromTo(".footer__top > *", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, stagger: 0.08, scrollTrigger: { trigger: ".footer", start: "top 85%" } });
+
+    /* ---- nav activ ---- */
+    ["vitrina", "comanda", "contact"].forEach(function (id) {
+      var sec = document.getElementById(id);
+      var link = $('.nav__links a[href="#' + id + '"]');
       if (!sec || !link) return;
-      ScrollTrigger.create({
-        trigger: sec, start: "top 45%", end: "bottom 45%",
-        onToggle: function (self) { link.classList.toggle("is-active", self.isActive); }
-      });
+      ScrollTrigger.create({ trigger: sec, start: "top 50%", end: "bottom 50%", onToggle: function (s) { link.classList.toggle("is-active", s.isActive); } });
     });
 
     /* ---- butoane magnetice ---- */
     if (fine) {
-      document.querySelectorAll(".btn, .card__order, .badge").forEach(function (el) {
-        var qx = gsap.quickTo(el, "x", { duration: 0.4, ease: "power3.out" });
-        var qy = gsap.quickTo(el, "y", { duration: 0.4, ease: "power3.out" });
+      $$(".btn, .item__order, .badge, .show__btn, .orb").forEach(function (el) {
+        var strength = el.classList.contains("orb") ? 0.35 : 0.22;
+        var max = el.classList.contains("orb") ? 26 : 10;
+        var qx = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3.out" });
+        var qy = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3.out" });
         el.addEventListener("mousemove", function (e) {
           var r = el.getBoundingClientRect();
-          var dx = e.clientX - (r.left + r.width / 2);
-          var dy = e.clientY - (r.top + r.height / 2);
-          qx(Math.max(-10, Math.min(10, dx * 0.22)));
-          qy(Math.max(-8, Math.min(8, dy * 0.22)));
+          qx(gsap.utils.clamp(-max, max, (e.clientX - r.left - r.width / 2) * strength));
+          qy(gsap.utils.clamp(-max, max, (e.clientY - r.top - r.height / 2) * strength));
         });
-        el.addEventListener("mouseleave", function () {
-          gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1,0.45)" });
-        });
+        el.addEventListener("mouseleave", function () { gsap.to(el, { x: 0, y: 0, duration: 0.9, ease: "elastic.out(1,0.4)" }); });
       });
     }
 
-    /* ---- cursor follower ---- */
-    var cursor = document.querySelector(".cursor");
+    /* ---- cursor ---- */
+    var cursor = $(".cursor");
     if (cursor && fine) {
-      var dot = cursor.querySelector(".cursor__dot");
-      var ring = cursor.querySelector(".cursor__ring");
-      gsap.set([dot, ring], { xPercent: 0, yPercent: 0, autoAlpha: 0 });
-      var dx = gsap.quickTo(dot, "x", { duration: 0.08, ease: "power2.out" });
-      var dy = gsap.quickTo(dot, "y", { duration: 0.08, ease: "power2.out" });
-      var rx = gsap.quickTo(ring, "x", { duration: 0.32, ease: "power3.out" });
-      var ry = gsap.quickTo(ring, "y", { duration: 0.32, ease: "power3.out" });
-      var shown = false;
+      var dot = $(".cursor__dot", cursor), ring = $(".cursor__ring", cursor), label = $(".cursor__label", cursor);
+      gsap.set([dot, ring], { autoAlpha: 0 });
+      var dx = gsap.quickTo(dot, "x", { duration: 0.08 }), dy = gsap.quickTo(dot, "y", { duration: 0.08 });
+      var rx = gsap.quickTo(ring, "x", { duration: 0.38, ease: "power3.out" }), ry = gsap.quickTo(ring, "y", { duration: 0.38, ease: "power3.out" });
+      var on = false;
       window.addEventListener("mousemove", function (e) {
-        if (!shown) { shown = true; gsap.to([dot, ring], { autoAlpha: 1, duration: 0.3 }); }
+        if (!on) { on = true; gsap.to([dot, ring], { autoAlpha: 1, duration: 0.3 }); }
         dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY);
       }, { passive: true });
       document.addEventListener("mouseover", function (e) {
-        cursor.classList.toggle("is-on", !!e.target.closest("a,button,[role=button]"));
+        var lab = e.target.closest("[data-cursor]");
+        cursor.classList.toggle("is-label", !!lab);
+        if (lab) label.textContent = lab.dataset.cursor;
+        cursor.classList.toggle("is-on", !lab && !!e.target.closest("a,button"));
       });
       document.addEventListener("mousedown", function () { cursor.classList.add("is-down"); });
       document.addEventListener("mouseup", function () { cursor.classList.remove("is-down"); });
-      document.addEventListener("mouseleave", function () { gsap.to([dot, ring], { autoAlpha: 0, duration: 0.3 }); shown = false; });
+      document.documentElement.addEventListener("mouseleave", function () { gsap.to([dot, ring], { autoAlpha: 0, duration: 0.3 }); on = false; });
     }
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
   }
 
-  /* ------------------------------------------------------------ */
   function init() {
-    var year = document.getElementById("year");
-    if (year) year.textContent = new Date().getFullYear();
-    if (!hasGsap || typeof ScrollTrigger === "undefined" || typeof Lenis === "undefined" || reduce) {
+    var y = document.getElementById("year");
+    if (y) y.textContent = new Date().getFullYear();
+    if (!full) return initLite();
+    try { initFull(); } catch (err) {
+      if (window.console) console.error(err);
+      if (window.gsap) gsap.set("*", { clearProps: "opacity,visibility,transform,clipPath" });
       initLite();
-      return;
     }
-    try { initFull(); } catch (err) { initLite(); }
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
 })();
